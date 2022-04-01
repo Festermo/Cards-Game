@@ -5,6 +5,7 @@ public class Stats : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private JSONController _jsonController;
     public static int Score { get; private set; }
     public static int Level { get; private set; }
 
@@ -42,7 +43,10 @@ public class Stats : MonoBehaviour
 
     public void CheckMaxScore()
     {
-        if (Score > PlayerPrefs.GetInt("MaxScore"))
-            PlayerPrefs.SetInt("MaxScore", Score);
+        if (Score > _jsonController.LoadMaxScore())
+        {
+            StructToRemember structToRemember = new StructToRemember { MaxScore = Score };
+            _jsonController.SaveMaxScore(structToRemember);
+        }
     }
 }

@@ -6,10 +6,11 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private string _sceneToLoad = "Game";
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private JSONController _jsonContoller;
 
     private void Awake()
     {
-        _scoreText.text = "Max Score: " + PlayerPrefs.GetInt("MaxScore").ToString();
+        _scoreText.text = "Max Score: " + _jsonContoller.LoadMaxScore();
     }
 
     public void StartGame()
